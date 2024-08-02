@@ -58,7 +58,3 @@ for i in range(2, N+1):
       if is_prime[j]:
         is_prime[j] = False
 ```
-
-## 참고
-
-엘리스코딩 알고리즘의 정석 초급
