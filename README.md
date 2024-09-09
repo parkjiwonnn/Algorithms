@@ -1,6 +1,6 @@
 # Algorithms
 
-알고리즘, 자료구조 학습 기록을 위한 레포지토리(24.06.27. ~)
+알고리즘, 자료구조 학습 기록을 위한 레포지토리  
 
 ## 자료구조
 
@@ -31,6 +31,3 @@
 - recursion
 - sorting
 
-## 참고
-
-https://github.com/trekhleb/javascript-algorithms/tree/master
