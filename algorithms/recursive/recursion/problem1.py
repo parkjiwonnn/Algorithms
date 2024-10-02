@@ -1,23 +1,27 @@
-# 백준 15649번
+# 백준 2961번
 
-def recur(i):
+def recur(idx, sin, sun, use):
+    global answer
 
-    if i == m:
-        print(*arr)
+    if idx == n:
+        if use > 0:
+            answer = min(answer, abs(sin - sun))
         return
 
-    for j in range(1, n+1):
-        if visited[j]:
-            continue
-        visited[j] = 1
-        arr.append(j)
-        recur(i+1)
-        arr.pop()
-        visited[j] = 0
+    recur(idx + 1, sin * foods[idx][0], sun + foods[idx][1], use+1)
+    recur(idx + 1, sin, sun, use)
 
 
-arr = []
-n, m = map(int, input().split())
-visited = [0 for _ in range(n+1)]
+n = int(input())
 
-recur(0)
+foods = [() for _ in range(n)]
+
+for i in range(n):
+    a, b = map(int, input().split())
+    foods[i] = (a, b)
+
+answer = 1e9
+
+recur(0, 1, 0, 0)
+
+print(answer)

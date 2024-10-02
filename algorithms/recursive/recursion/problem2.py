@@ -1,70 +1,46 @@
-# 백준 2503번
+# 백준 19942번
 
-import sys
-sys.setrecursionlimit(9999999)
-
-def checker(idx,number):
-    _number = hint[idx][0]
-    _strike = hint[idx][1]
-    _ball = hint[idx][2]
-
-    strike = 0
-    ball = 0
-
-    _A = _number // 100
-    _B = (_number - (_A * 100)) // 10 
-    _C = _number % 10
-
-
-    A = number // 100
-    B = (number - (A * 100)) // 10 
-    C = number % 10
-
-    if A == 0 or B == 0 or C == 0:
-        return False
-
-    if A == B or A == C or B == C:
-        return False
-
-    if A == _A:
-        strike+= 1
-    if B == _B:
-        strike+= 1
-    if C == _C:
-        strike+= 1
-    
-    if A == _B or A == _C:
-        ball += 1
-    if B == _A or B == _C:
-        ball += 1
-    if C == _A or C == _B:
-        ball += 1
-    
-    if strike == _strike and ball == _ball:
-        return True
-
-    return False
-
-
-def recur(idx, number):
+def recur(idx,p,f,c,v,price):
     global answer
+    global used
+    global answer_used
 
+    if p >= protein and f >= fat and c >= carbo and v >= vitamin:
+        if answer > price:
+            answer = min(answer, price)
+            answer_used = []
+            for i in used:
+                answer_used.append(i)            
     if idx == n:
-        answer += 1
-        # print(number)
-        recur(0, number+1)
         return
     
-    if number == 1000:
-        return
-    
-    if checker(idx,number):
-        recur(idx+1, number)
-    else:
-        recur(0, number+1)
+    used.append(idx+1)
+    recur(idx+1, p+ing[idx][0], f +ing[idx][1], c + ing[idx][2], v + ing[idx][3], price+ing[idx][4])
+    used.pop()
+
+    recur(idx+1,p,f,c,v,price)
 
 n = int(input())
-hint = [list(map(int,input().split())) for _ in range(n)]
-answer = 0
-recur(0, 100)
-print(answer)
+
+protein, fat, carbo, vitamin = map(int,input().split())
+
+ing = [[] for _ in range(n)]
+
+for i in range(n):
+    a,b,c,d,e = map(int,input().split())
+    ing[i] = [a,b,c,d,e]
+
+answer = 1e9
+
+used = []
+answer_used = []
+
+recur(0,0,0,0,0,0)
+
+answer_used.sort()
+
+if answer_used:
+    print(answer)
+    print(*answer_used)
+else:
+    print(-1)
