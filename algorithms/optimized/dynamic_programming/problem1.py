@@ -30,7 +30,7 @@ dp = [-1 for _ in range(N+1)]
 ans = sol(1)
 print(ans)
 
-# Botton-Up DP
+# Bottom-Up DP
 N = int(input())
 table = [[] for _ in range(N)]
 for i in range(N):

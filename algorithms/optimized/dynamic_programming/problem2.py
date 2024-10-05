@@ -25,7 +25,7 @@ ans = recur(0,0)
 
 print(ans)
 
-# Botton-Up DP
+# Bottom-Up DP
 import sys
 
 input = sys.stdin.readline
